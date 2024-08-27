@@ -1171,8 +1171,12 @@ namespace DependenciesHunter
         {
 #if HUNT_ADDRESSABLES
             var settings = AddressableAssetSettingsDefaultObject.Settings;
-            var entry = settings.FindAssetEntry(AssetDatabase.AssetPathToGUID(assetPath));
-            return entry != null;
+            if (settings != null)
+            {
+                var entry = settings.FindAssetEntry(AssetDatabase.AssetPathToGUID(assetPath));
+                return entry != null;
+            }
+            return false;
 #else
             return false;
 #endif
